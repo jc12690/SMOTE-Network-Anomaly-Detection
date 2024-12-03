@@ -1,0 +1,348 @@
+2024-11-21 15:34:45,202 - INFO - === Starting Main Script ===
+2024-11-21 15:34:45,202 - INFO - Mode: train
+2024-11-21 15:34:45,203 - INFO - Data Path: data/merged.csv
+2024-11-21 15:34:45,203 - INFO - Checkpoint Path: ./checkpoints/
+2024-11-21 15:34:45,203 - INFO - Model Name: autoencoder
+2024-11-21 15:34:45,203 - INFO - Mode: Training
+2024-11-21 15:34:45,203 - INFO - Starting training for model: autoencoder
+2024-11-21 15:36:11,573 - INFO - Training data shape: X_train: (2264594, 78), Y_train: (2264594,)
+2024-11-21 15:36:11,573 - INFO - Validation data shape: X_val: (566149, 78), Y_val: (566149,)
+2024-11-21 15:36:11,574 - INFO - Label distribution in training data:
+2024-11-21 15:36:11,596 - INFO - label
+0    1818582
+1     446012
+Name: count, dtype: int64
+2024-11-21 15:36:11,606 - INFO - Number of normal samples (label=0): 1818582
+2024-11-21 15:36:11,606 - INFO - Number of anomaly samples (label=1): 446012
+2024-11-21 15:36:11,606 - INFO - Applying SMOTE to handle class imbalance...
+2024-11-21 15:46:25,036 - INFO - After SMOTE, training data shape: X_train_resampled: (3637164, 78), Y_train_resampled: (3637164,)
+2024-11-21 15:46:25,037 - INFO - Label distribution after SMOTE:
+2024-11-21 15:46:25,061 - INFO - label
+0    1818582
+1    1818582
+Name: count, dtype: int64
+2024-11-21 15:46:25,154 - INFO - AutoEncoder model compiled successfully.
+2024-11-21 15:46:51,122 - INFO - Rescaled training data shape: (3637164, 78)
+2024-11-21 15:46:51,122 - INFO - Performing Recursive Feature Elimination (RFE) for feature selection...
+2024-11-21 16:14:28,397 - INFO - After RFE, training data shape: (3637164, 50), validation data shape: (566149, 50)
+2024-11-21 16:14:28,400 - INFO - RFE selector saved at: ./checkpoints/rfe_selector.pkl
+2024-11-21 16:14:33,885 - INFO - Normal data shape (x_norm): (1818582, 78)
+2024-11-21 16:14:33,885 - INFO - Anomaly data shape (x_fraud): (1818582, 78)
+2024-11-21 16:14:33,885 - INFO - Extracting hidden representations for normal samples from index 9000 to 15000.
+2024-11-21 16:14:34,447 - INFO - Extracting hidden representations for anomaly samples from index 9000 to 15000.
+2024-11-21 16:14:34,811 - INFO - Combined hidden representation shape: (12000, 50)
+2024-11-21 16:14:34,812 - INFO - Combined labels shape: (12000,)
+2024-11-21 16:14:34,816 - INFO - Classifier training data shape: (9000, 50), labels shape: (9000,)
+2024-11-21 16:14:34,816 - INFO - Classifier validation data shape: (3000, 50), labels shape: (3000,)
+2024-11-21 16:14:34,816 - INFO - Performing hyperparameter tuning for Logistic Regression using GridSearchCV...
+2024-11-21 16:14:41,149 - INFO - Best Logistic Regression parameters: {'C': 100, 'solver': 'liblinear'}
+2024-11-21 16:14:41,150 - INFO - Classification Report for Logistic Regression after GridSearchCV:
+2024-11-21 16:14:41,167 - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.89      0.88      0.88      1527
+         1.0       0.87      0.89      0.88      1473
+
+    accuracy                           0.88      3000
+   macro avg       0.88      0.88      0.88      3000
+weighted avg       0.88      0.88      0.88      3000
+
+2024-11-21 16:14:41,168 - INFO - Accuracy Score: 0.8833333333333333
+2024-11-21 16:14:41,169 - INFO - Training Random Forest Classifier as an alternative to Logistic Regression...
+2024-11-21 16:14:41,598 - INFO - Classification Report for Random Forest Classifier:
+2024-11-21 16:14:41,614 - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.96      0.93      0.95      1527
+         1.0       0.93      0.96      0.95      1473
+
+    accuracy                           0.95      3000
+   macro avg       0.95      0.95      0.95      3000
+weighted avg       0.95      0.95      0.95      3000
+
+2024-11-21 16:14:41,615 - INFO - Accuracy Score: 0.9456666666666667
+2024-11-21 16:14:41,645 - INFO - Selected Random Forest Classifier as the best model based on F1-Score.
+2024-11-21 16:14:41,657 - INFO - Best classifier (RandomForestClassifier) saved at: ./checkpoints/best_classifier_RandomForestClassifier.pkl
+2024-11-21 16:14:41,710 - INFO - AutoEncoder model saved at: ./checkpoints/autoencoder.keras
+2024-11-21 16:14:41,807 - INFO - AutoEncoder model loaded for hidden representation extraction.
+2024-11-21 16:14:41,807 - INFO - 
+Final Classification Report for Best Model:
+2024-11-21 16:14:41,822 - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.96      0.93      0.95      1527
+         1.0       0.93      0.96      0.95      1473
+
+    accuracy                           0.95      3000
+   macro avg       0.95      0.95      0.95      3000
+weighted avg       0.95      0.95      0.95      3000
+
+2024-11-21 16:14:41,824 - INFO - Final Accuracy Score: 0.9456666666666667
+2024-11-21 16:14:41,824 - INFO - Training process completed successfully.
+2024-11-21 16:14:43,317 - INFO - === Main Script Completed ===
+2024-11-22 15:30:00,159 - INFO - === Starting Main Script ===
+2024-11-22 15:30:00,160 - INFO - Mode: train
+2024-11-22 15:30:00,160 - INFO - Data Path: data/merged.csv
+2024-11-22 15:30:00,161 - INFO - Checkpoint Path: ./checkpoints/
+2024-11-22 15:30:00,161 - INFO - Model Name: autoencoder
+2024-11-22 15:30:00,161 - INFO - Mode: Training
+2024-11-22 15:30:00,161 - INFO - Starting training for model: autoencoder
+2024-11-22 15:31:31,711 - INFO - Training data shape: X_train: (2264594, 78), Y_train: (2264594,)
+2024-11-22 15:31:31,713 - INFO - Validation data shape: X_val: (566149, 78), Y_val: (566149,)
+2024-11-22 15:31:31,713 - INFO - Label distribution in training data:
+2024-11-22 15:31:31,731 - INFO - label
+0    1818582
+1     446012
+Name: count, dtype: int64
+2024-11-22 15:31:31,738 - INFO - Number of normal samples (label=0): 1818582
+2024-11-22 15:31:31,739 - INFO - Number of anomaly samples (label=1): 446012
+2024-11-22 15:31:31,739 - INFO - Applying SMOTE to handle class imbalance...
+2024-11-22 15:42:20,424 - INFO - After SMOTE, training data shape: X_train_resampled: (3637164, 78), Y_train_resampled: (3637164,)
+2024-11-22 15:42:20,426 - INFO - Label distribution after SMOTE:
+2024-11-22 15:42:20,451 - INFO - label
+0    1818582
+1    1818582
+Name: count, dtype: int64
+2024-11-22 15:42:20,632 - INFO - AutoEncoder model compiled successfully.
+2024-11-22 15:42:46,617 - INFO - Rescaled training data shape: (3637164, 78)
+2024-11-22 15:42:46,618 - INFO - Performing Recursive Feature Elimination (RFE) for feature selection...
+2024-11-22 16:16:13,151 - INFO - Selected features and their importance scores:
+2024-11-22 16:16:13,154 - INFO - fwd packet length std: 120.57044351820457
+2024-11-22 16:16:13,154 - INFO - bwd packet length min: 80.69285070877037
+2024-11-22 16:16:13,154 - INFO - fwd packet length max: 76.98767291222936
+2024-11-22 16:16:13,155 - INFO - down/up ratio: 72.88069490676651
+2024-11-22 16:16:13,155 - INFO - active mean: 70.68490661373595
+2024-11-22 16:16:13,155 - INFO - active max: 70.59124291910125
+2024-11-22 16:16:13,156 - INFO - min packet length: 53.78822392382464
+2024-11-22 16:16:13,156 - INFO - total length of bwd packets: 52.729521456259
+2024-11-22 16:16:13,156 - INFO - subflow bwd bytes: 52.729521456259
+2024-11-22 16:16:13,156 - INFO - packet length std: 46.37786460820147
+2024-11-22 16:16:13,157 - INFO - flow bytes/s: 43.62324612975528
+2024-11-22 16:16:13,157 - INFO - max packet length: 30.26286628493576
+2024-11-22 16:16:13,157 - INFO - bwd packet length std: 25.675127253731215
+2024-11-22 16:16:13,157 - INFO - fwd iat max: 18.08423442763403
+2024-11-22 16:16:13,158 - INFO - bwd packet length max: 16.59462318346839
+2024-11-22 16:16:13,158 - INFO - average packet size: 16.05324263211445
+2024-11-22 16:16:13,158 - INFO - total length of fwd packets: 11.946788110993198
+2024-11-22 16:16:13,158 - INFO - subflow fwd bytes: 11.946788110993198
+2024-11-22 16:16:13,159 - INFO - flow packets/s: 10.706317245706167
+2024-11-22 16:16:13,159 - INFO - init_win_bytes_backward: 9.752735077847175
+2024-11-22 16:16:13,159 - INFO - avg bwd segment size: 9.648823412107857
+2024-11-22 16:16:13,159 - INFO - bwd packet length mean: 9.648823412083056
+2024-11-22 16:16:13,160 - INFO - flow duration: 9.324967190687543
+2024-11-22 16:16:13,160 - INFO - fwd iat total: 9.152247005501264
+2024-11-22 16:16:13,160 - INFO - bwd iat max: 8.88507352863855
+2024-11-22 16:16:13,161 - INFO - flow iat mean: 8.77590198797568
+2024-11-22 16:16:13,161 - INFO - min_seg_size_forward: 7.043153032982529
+2024-11-22 16:16:13,161 - INFO - bwd header length: 6.951395448906995
+2024-11-22 16:16:13,161 - INFO - fwd header length: 6.883727179932543
+2024-11-22 16:16:13,161 - INFO - fwd header length.1: 6.883727179932543
+2024-11-22 16:16:13,162 - INFO - fwd iat mean: 6.798565988803223
+2024-11-22 16:16:13,162 - INFO - bwd iat total: 6.4282592764982
+2024-11-22 16:16:13,162 - INFO - fwd packet length mean: 6.417061055452425
+2024-11-22 16:16:13,163 - INFO - avg fwd segment size: 6.417061055452425
+2024-11-22 16:16:13,163 - INFO - bwd iat mean: 6.366987235210419
+2024-11-22 16:16:13,163 - INFO - packet length mean: 5.8261857794217375
+2024-11-22 16:16:13,163 - INFO - ece flag count: 4.788831585751138
+2024-11-22 16:16:13,164 - INFO - rst flag count: 4.707726361510861
+2024-11-22 16:16:13,164 - INFO - psh flag count: 3.5417887517889386
+2024-11-22 16:16:13,164 - INFO - fwd urg flags: 3.2757279138273345
+2024-11-22 16:16:13,165 - INFO - cwe flag count: 3.2757279138273345
+2024-11-22 16:16:13,165 - INFO - bwd iat std: 3.1947080123749596
+2024-11-22 16:16:13,168 - INFO - destination port: 3.175753698907887
+2024-11-22 16:16:13,169 - INFO - fwd packets/s: 2.7761012660573607
+2024-11-22 16:16:13,169 - INFO - active min: 2.6069553520155573
+2024-11-22 16:16:13,169 - INFO - urg flag count: 2.5374260675523455
+2024-11-22 16:16:13,170 - INFO - ack flag count: 2.0341274733821493
+2024-11-22 16:16:13,170 - INFO - bwd iat min: 1.621898890971346
+2024-11-22 16:16:13,170 - INFO - fin flag count: 1.4663661953802558
+2024-11-22 16:16:13,170 - INFO - active std: 1.1302681703311055
+2024-11-22 16:16:23,982 - INFO - After RFE, training data shape: (3637164, 50), validation data shape: (566149, 50)
+2024-11-22 16:16:23,995 - INFO - RFE selector saved at: ./checkpoints/rfe_selector.pkl
+2024-11-22 16:16:43,919 - INFO - Normal data shape (x_norm): (1818582, 78)
+2024-11-22 16:16:43,922 - INFO - Anomaly data shape (x_fraud): (1818582, 78)
+2024-11-22 16:16:43,923 - INFO - Extracting hidden representations for normal samples from index 9000 to 15000.
+2024-11-22 16:16:45,800 - INFO - Extracting hidden representations for anomaly samples from index 9000 to 15000.
+2024-11-22 16:16:46,876 - INFO - Combined hidden representation shape: (12000, 50)
+2024-11-22 16:16:46,876 - INFO - Combined labels shape: (12000,)
+2024-11-22 16:16:46,885 - INFO - Classifier training data shape: (9000, 50), labels shape: (9000,)
+2024-11-22 16:16:46,885 - INFO - Classifier validation data shape: (3000, 50), labels shape: (3000,)
+2024-11-22 16:16:46,886 - INFO - Performing hyperparameter tuning for Logistic Regression using GridSearchCV...
+2024-11-22 16:17:12,014 - INFO - Best Logistic Regression parameters: {'C': 100, 'solver': 'liblinear'}
+2024-11-22 16:17:12,029 - INFO - Classification Report for Logistic Regression after GridSearchCV:
+2024-11-22 16:17:12,184 - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.89      0.86      0.87      1527
+         1.0       0.86      0.89      0.87      1473
+
+    accuracy                           0.87      3000
+   macro avg       0.87      0.87      0.87      3000
+weighted avg       0.87      0.87      0.87      3000
+
+2024-11-22 16:17:12,199 - INFO - Accuracy Score: 0.8726666666666667
+2024-11-22 16:17:12,209 - INFO - Training Random Forest Classifier as an alternative to Logistic Regression...
+2024-11-22 16:17:14,285 - INFO - Classification Report for Random Forest Classifier:
+2024-11-22 16:17:14,375 - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.96      0.95      0.96      1527
+         1.0       0.95      0.96      0.95      1473
+
+    accuracy                           0.96      3000
+   macro avg       0.96      0.96      0.96      3000
+weighted avg       0.96      0.96      0.96      3000
+
+2024-11-22 16:17:14,382 - INFO - Accuracy Score: 0.9553333333333334
+2024-11-22 16:17:14,552 - INFO - Selected Random Forest Classifier as the best model based on F1-Score.
+2024-11-22 16:17:14,638 - INFO - Best classifier (RandomForestClassifier) saved at: ./checkpoints/best_classifier_RandomForestClassifier.pkl
+2024-11-22 16:17:15,065 - INFO - AutoEncoder model saved at: ./checkpoints/autoencoder.keras
+2024-11-22 16:17:15,626 - INFO - AutoEncoder model loaded for hidden representation extraction.
+2024-11-22 16:17:15,630 - INFO - 
+Final Classification Report for Best Model:
+2024-11-22 16:17:15,727 - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.96      0.95      0.96      1527
+         1.0       0.95      0.96      0.95      1473
+
+    accuracy                           0.96      3000
+   macro avg       0.96      0.96      0.96      3000
+weighted avg       0.96      0.96      0.96      3000
+
+2024-11-22 16:17:15,734 - INFO - Final Accuracy Score: 0.9553333333333334
+2024-11-22 16:17:15,734 - INFO - Training process completed successfully.
+2024-11-22 16:17:21,688 - INFO - === Main Script Completed ===
+2024-11-23 00:37:17,143 - INFO - === Starting Main Script ===
+2024-11-23 00:37:17,144 - INFO - Mode: train
+2024-11-23 00:37:17,144 - INFO - Data Path: data/merged.csv
+2024-11-23 00:37:17,144 - INFO - Checkpoint Path: ./checkpoints/
+2024-11-23 00:37:17,144 - INFO - Model Name: autoencoder
+2024-11-23 00:37:17,144 - INFO - Mode: Training
+2024-11-23 00:37:17,144 - INFO - Starting training for model: autoencoder
+2024-11-23 00:38:36,905 - INFO - Training data shape: X_train: (2264594, 78), Y_train: (2264594,)
+2024-11-23 00:38:36,906 - INFO - Validation data shape: X_val: (566149, 78), Y_val: (566149,)
+2024-11-23 00:38:36,906 - INFO - Label distribution in training data:
+2024-11-23 00:38:36,928 - INFO - label
+0    1818582
+1     446012
+Name: count, dtype: int64
+2024-11-23 00:38:36,936 - INFO - Number of normal samples (label=0): 1818582
+2024-11-23 00:38:36,937 - INFO - Number of anomaly samples (label=1): 446012
+2024-11-23 00:38:36,937 - INFO - Applying SMOTE to handle class imbalance...
+2024-11-23 00:52:39,939 - INFO - After SMOTE, training data shape: X_train_resampled: (3637164, 78), Y_train_resampled: (3637164,)
+2024-11-23 00:52:39,942 - INFO - Label distribution after SMOTE:
+2024-11-23 00:52:39,978 - INFO - label
+0    1818582
+1    1818582
+Name: count, dtype: int64
+2024-11-23 00:52:40,311 - INFO - AutoEncoder model compiled successfully.
+2024-11-23 00:53:23,282 - INFO - Rescaled training data shape: (3637164, 78)
+2024-11-23 00:53:23,284 - INFO - Performing Recursive Feature Elimination (RFE) for feature selection...
+2024-11-23 01:17:40,893 - INFO - Selected features and their importance scores:
+2024-11-23 01:17:40,896 - INFO - fwd packet length std: 120.57044351820457
+2024-11-23 01:17:40,896 - INFO - bwd packet length min: 80.69285070877037
+2024-11-23 01:17:40,896 - INFO - fwd packet length max: 76.98767291222936
+2024-11-23 01:17:40,897 - INFO - down/up ratio: 72.88069490676651
+2024-11-23 01:17:40,897 - INFO - active mean: 70.68490661373595
+2024-11-23 01:17:40,897 - INFO - active max: 70.59124291910125
+2024-11-23 01:17:40,897 - INFO - min packet length: 53.78822392382464
+2024-11-23 01:17:40,897 - INFO - total length of bwd packets: 52.729521456259
+2024-11-23 01:17:40,897 - INFO - subflow bwd bytes: 52.729521456259
+2024-11-23 01:17:40,897 - INFO - packet length std: 46.37786460820147
+2024-11-23 01:17:40,897 - INFO - flow bytes/s: 43.62324612975528
+2024-11-23 01:17:40,898 - INFO - max packet length: 30.26286628493576
+2024-11-23 01:17:40,898 - INFO - bwd packet length std: 25.675127253731215
+2024-11-23 01:17:40,898 - INFO - fwd iat max: 18.08423442763403
+2024-11-23 01:17:40,898 - INFO - bwd packet length max: 16.59462318346839
+2024-11-23 01:17:40,898 - INFO - average packet size: 16.05324263211445
+2024-11-23 01:17:40,898 - INFO - total length of fwd packets: 11.946788110993198
+2024-11-23 01:17:40,898 - INFO - subflow fwd bytes: 11.946788110993198
+2024-11-23 01:17:40,898 - INFO - flow packets/s: 10.706317245706167
+2024-11-23 01:17:40,898 - INFO - init_win_bytes_backward: 9.752735077847175
+2024-11-23 01:17:40,899 - INFO - avg bwd segment size: 9.648823412107857
+2024-11-23 01:17:40,899 - INFO - bwd packet length mean: 9.648823412083056
+2024-11-23 01:17:40,899 - INFO - flow duration: 9.324967190687543
+2024-11-23 01:17:40,899 - INFO - fwd iat total: 9.152247005501264
+2024-11-23 01:17:40,899 - INFO - bwd iat max: 8.88507352863855
+2024-11-23 01:17:40,899 - INFO - flow iat mean: 8.77590198797568
+2024-11-23 01:17:40,899 - INFO - min_seg_size_forward: 7.043153032982529
+2024-11-23 01:17:40,899 - INFO - bwd header length: 6.951395448906995
+2024-11-23 01:17:40,900 - INFO - fwd header length: 6.883727179932543
+2024-11-23 01:17:40,900 - INFO - fwd header length.1: 6.883727179932543
+2024-11-23 01:17:40,900 - INFO - fwd iat mean: 6.798565988803223
+2024-11-23 01:17:40,900 - INFO - bwd iat total: 6.4282592764982
+2024-11-23 01:17:40,900 - INFO - fwd packet length mean: 6.417061055452425
+2024-11-23 01:17:40,900 - INFO - avg fwd segment size: 6.417061055452425
+2024-11-23 01:17:40,900 - INFO - bwd iat mean: 6.366987235210419
+2024-11-23 01:17:40,900 - INFO - packet length mean: 5.8261857794217375
+2024-11-23 01:17:40,900 - INFO - ece flag count: 4.788831585751138
+2024-11-23 01:17:40,901 - INFO - rst flag count: 4.707726361510861
+2024-11-23 01:17:40,901 - INFO - psh flag count: 3.5417887517889386
+2024-11-23 01:17:40,901 - INFO - fwd urg flags: 3.2757279138273345
+2024-11-23 01:17:40,901 - INFO - cwe flag count: 3.2757279138273345
+2024-11-23 01:17:40,901 - INFO - bwd iat std: 3.1947080123749596
+2024-11-23 01:17:40,901 - INFO - destination port: 3.175753698907887
+2024-11-23 01:17:40,901 - INFO - fwd packets/s: 2.7761012660573607
+2024-11-23 01:17:40,902 - INFO - active min: 2.6069553520155573
+2024-11-23 01:17:40,902 - INFO - urg flag count: 2.5374260675523455
+2024-11-23 01:17:40,902 - INFO - ack flag count: 2.0341274733821493
+2024-11-23 01:17:40,902 - INFO - bwd iat min: 1.621898890971346
+2024-11-23 01:17:40,902 - INFO - fin flag count: 1.4663661953802558
+2024-11-23 01:17:40,902 - INFO - active std: 1.1302681703311055
+2024-11-23 01:17:46,556 - INFO - After RFE, training data shape: (3637164, 50), validation data shape: (566149, 50)
+2024-11-23 01:17:46,563 - INFO - RFE selector saved at: ./checkpoints/rfe_selector.pkl
+2024-11-23 01:17:55,012 - INFO - Normal data shape (x_norm): (1818582, 78)
+2024-11-23 01:17:55,013 - INFO - Anomaly data shape (x_fraud): (1818582, 78)
+2024-11-23 01:17:55,014 - INFO - Extracting hidden representations for normal samples from index 9000 to 15000.
+2024-11-23 01:17:55,876 - INFO - Extracting hidden representations for anomaly samples from index 9000 to 15000.
+2024-11-23 01:17:56,255 - INFO - Combined hidden representation shape: (12000, 50)
+2024-11-23 01:17:56,255 - INFO - Combined labels shape: (12000,)
+2024-11-23 01:17:56,259 - INFO - Classifier training data shape: (9000, 50), labels shape: (9000,)
+2024-11-23 01:17:56,259 - INFO - Classifier validation data shape: (3000, 50), labels shape: (3000,)
+2024-11-23 01:17:56,259 - INFO - Performing hyperparameter tuning for Logistic Regression using GridSearchCV...
+2024-11-23 01:18:03,433 - INFO - Best Logistic Regression parameters: {'C': 100, 'solver': 'lbfgs'}
+2024-11-23 01:18:03,441 - INFO - Classification Report for Logistic Regression after GridSearchCV:
+2024-11-23 01:18:03,466 - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.90      0.86      0.88      1527
+         1.0       0.86      0.90      0.88      1473
+
+    accuracy                           0.88      3000
+   macro avg       0.88      0.88      0.88      3000
+weighted avg       0.88      0.88      0.88      3000
+
+2024-11-23 01:18:03,469 - INFO - Accuracy Score: 0.8796666666666667
+2024-11-23 01:18:03,470 - INFO - Training Random Forest Classifier as an alternative to Logistic Regression...
+2024-11-23 01:18:04,036 - INFO - Classification Report for Random Forest Classifier:
+2024-11-23 01:18:04,056 - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.93      0.95      1527
+         1.0       0.93      0.97      0.95      1473
+
+    accuracy                           0.95      3000
+   macro avg       0.95      0.95      0.95      3000
+weighted avg       0.95      0.95      0.95      3000
+
+2024-11-23 01:18:04,058 - INFO - Accuracy Score: 0.949
+2024-11-23 01:18:04,098 - INFO - Selected Random Forest Classifier as the best model based on F1-Score.
+2024-11-23 01:18:04,115 - INFO - Best classifier (RandomForestClassifier) saved at: ./checkpoints/best_classifier_RandomForestClassifier.pkl
+2024-11-23 01:18:04,240 - INFO - AutoEncoder model saved at: ./checkpoints/autoencoder.keras
+2024-11-23 01:18:04,429 - INFO - AutoEncoder model loaded for hidden representation extraction.
+2024-11-23 01:18:04,430 - INFO - 
+Final Classification Report for Best Model:
+2024-11-23 01:18:04,462 - INFO - 
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.93      0.95      1527
+         1.0       0.93      0.97      0.95      1473
+
+    accuracy                           0.95      3000
+   macro avg       0.95      0.95      0.95      3000
+weighted avg       0.95      0.95      0.95      3000
+
+2024-11-23 01:18:04,465 - INFO - Final Accuracy Score: 0.949
+2024-11-23 01:18:04,465 - INFO - Training process completed successfully.
+2024-11-23 01:18:06,275 - INFO - === Main Script Completed ===
